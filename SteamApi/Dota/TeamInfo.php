@@ -13,9 +13,9 @@ class TeamInfo extends DotaApi {
     }
 
     /**
-     * 
+     * allocated players and tournaments in a separate arrays
      * @param array $data
-     * @return array
+     * @return array team info
      */
     public function setTeams(array $data) {
         $data['name'] = (SteamApi::FILTER) ? SteamApi::filter($data['name']) : $data['name'];
@@ -34,7 +34,7 @@ class TeamInfo extends DotaApi {
             }
             $teams['id' . $team['team_id']] = $team;
         }
-        return $teams;
+        return (array) $teams;
     }
 
     public function result($team_id = 0) {

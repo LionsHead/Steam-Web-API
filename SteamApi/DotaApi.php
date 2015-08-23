@@ -159,6 +159,7 @@ class DotaApi extends Request {
      *      bool final (false)
      */
     public function getScheduledLeagueGames($time_min = 0, $time_max = 0) {
+        $params = [];
         if ($time_min > 0) {
             $params['date_min'] == $time_min;
         }
