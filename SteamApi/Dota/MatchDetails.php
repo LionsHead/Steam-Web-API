@@ -24,8 +24,9 @@ class MatchDetails extends DotaApi {
         '11' => 'Mid Only',
         '12' => 'Least Played',
         '13' => 'New Player Pool',
-        '14' => 'Compendium Matchmaking',
-        '16' => 'Captains Draft'
+        '14' => 'Compendium Matchmaking', // ?
+        '16' => 'Captains Draft',
+        '22' => 'Ranked All Pick'
     ];
     protected $lobbyType = [
         '-1' => 'Invalid',
@@ -91,6 +92,7 @@ class MatchDetails extends DotaApi {
 
         // VOLVO give replay salt back
         $json['dire_win'] = ($json['radiant_win'] === TRUE) ? 0 : 1; // more info
+        $json['radiant_win'] = (int)(bool)$json['radiant_win'];
         $this->matchInfo = $json;
     }
 
