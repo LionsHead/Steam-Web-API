@@ -26,6 +26,11 @@ class MatchDetails extends DotaApi {
         '13' => 'New Player Pool',
         '14' => 'Compendium Matchmaking', // ?
         '16' => 'Captains Draft',
+        '17' => 'Balanced Draft',
+        '18' => 'Ability Draft',
+        '19' => 'Unknow',
+        '20' => 'All Random Death Match',
+        '21' => 'Solo Mid 1vs1',
         '22' => 'Ranked All Pick'
     ];
     protected $lobbyType = [
@@ -37,6 +42,8 @@ class MatchDetails extends DotaApi {
         '4' => 'Co-op with bots',
         '5' => 'Team match',
         '6' => 'Solo Queue',
+        '7' => 'Ranked matchmaking',
+        '8' => 'Solo Mid 1vs1'
     ];
 
     /**
