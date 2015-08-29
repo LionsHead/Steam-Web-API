@@ -2,11 +2,11 @@
 
 namespace SteamApi;
 
-/**
- *
- */
+use SteamApi\Steam\SteamUser;
+
 class SteamApi extends Request {
-    const FILTER = TRUE; // pre-filtering of user data (nicknames, teams name)
+
+    const FILTER = TRUE; // pre-filtering (htmlentities) of user data (nicknames, teams name)
     //
     const GET_APP_LIST = 'http://api.steampowered.com/ISteamApps/GetAppList/v2/';
     const GET_PLAYERS = 'http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v2/';
@@ -92,10 +92,17 @@ class SteamApi extends Request {
      *           6 = Looking to play
      */
     public function getPlayerSummaries(array $steamids = []) {
+        $ids = '';
+        foreach ($steamids as $id) {
+            if ($id <> SteamApi::ANONYMOUS) {
+                $ids .= $id . ',';
+            }
+        }
         $json = $this->send(SteamApi::GET_PLAYERS, [
-            'steamids' => implode(',', $steamids)
+            'steamids' => $ids
                 ]);
-        return $json['response']['players'];
+        $users = new SteamUser($json['response']['players']);
+        return $users->getUsers();
     }
 
     /**
@@ -137,7 +144,7 @@ class SteamApi extends Request {
         if (!isset($json['response']['player_level'])) {
             return 0;
         }
-        return $json['response']['player_level'];
+        return (int) $json['response']['player_level'];
     }
 
     /**
@@ -287,13 +294,13 @@ class SteamApi extends Request {
         }
         return $json;
     }
-    
+
     /**
      * filter
      * @param string $str
      * @return string
      */
-    public static function filter($str){
+    public static function filter($str) {
         return htmlentities(trim($str), ENT_QUOTES);
     }
 
