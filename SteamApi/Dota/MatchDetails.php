@@ -50,7 +50,7 @@ class MatchDetails extends DotaApi {
         '270' => 'India',
         '260' => 'Peru',
         '250' => 'Chile',
-        '230' => 'China',
+        '240' => 'China',
         '220' => 'South Africa',
         '210' => 'South America',
         '200' => 'Europe East',
