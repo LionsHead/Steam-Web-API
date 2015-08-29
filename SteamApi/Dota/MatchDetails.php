@@ -45,6 +45,24 @@ class MatchDetails extends DotaApi {
         '7' => 'Ranked matchmaking',
         '8' => 'Solo Mid 1vs1'
     ];
+    // max id of regions
+    protected $maxReqions = [
+        '270' => 'India',
+        '260' => 'Peru',
+        '250' => 'Chile',
+        '230' => 'China',
+        '220' => 'South Africa',
+        '210' => 'South America',
+        '200' => 'Europe East',
+        '190' => 'Russia',
+        '180' => 'Australia',
+        '170' => 'China',
+        '160' => 'Southeast Asia',
+        '150' => 'South Korea',
+        '140' => 'Europe West',
+        '130' => 'US East',
+        '120' => 'US West'
+    ];
 
     /**
      * picks and bans array:
@@ -96,10 +114,10 @@ class MatchDetails extends DotaApi {
         $json['league_id'] = $json['leagueid'];
         // unset($this->matchInfo['leagueid']);
         // heresy end? realy?
-
         // VOLVO give replay salt back
         $json['dire_win'] = ($json['radiant_win'] === TRUE) ? 0 : 1; // more info
-        $json['radiant_win'] = (int)(bool)$json['radiant_win'];
+        $json['radiant_win'] = (int) (bool) $json['radiant_win'];
+        $json['region'] = $this->getRegion($json['cluster']);
         $this->matchInfo = $json;
     }
 
@@ -173,6 +191,25 @@ class MatchDetails extends DotaApi {
         } else {
             return $this->lobbyType['-1'];
         }
+    }
+
+    /**
+     *  definition of server region
+     *
+     * @param int cluster id
+     * @return string server reqion name
+     */
+    public function getRegion($id = 322) {
+        $region = 'Unknow';
+
+        foreach ($array as $r_id => $r_name) {
+            // assigned region if  cluster less max region id
+            if ($id < $r_id) {
+                $region = $r_name;
+            }
+        }
+
+        return $region;
     }
 
 }
