@@ -2,11 +2,9 @@
 
 namespace SteamApi;
 
-/**
- *
- */
-use \SteamApi\Dota\TeamInfo;
-use \SteamApi\Dota\MatchDetails;
+
+use SteamApi\Dota\TeamInfo;
+use SteamApi\Dota\MatchDetails;
 
 class DotaApi extends Request {
 
@@ -75,7 +73,7 @@ class DotaApi extends Request {
      *      13 - New Player Pool
      *      14 - Compendium Matchmaking
      *      16 - Captain's Draft
-     * 
+     *
      * // skill d`t work?
      *  int skill - Skill bracket for the matches (Ignored if an account ID is specified).
      *    0 - Any
@@ -140,7 +138,7 @@ class DotaApi extends Request {
 
         $info = new TeamInfo($json['result']['teams']);
         // information about the team if need only one, else - teams array
-        return $info->result(($count == 1) ? $team_id : 0);
+        return $info->getTeams(($count == 1) ? $team_id : 0);
     }
 
     /**

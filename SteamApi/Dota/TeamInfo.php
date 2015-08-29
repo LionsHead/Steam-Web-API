@@ -37,7 +37,7 @@ class TeamInfo extends DotaApi {
         return (array) $teams;
     }
 
-    public function result($team_id = 0) {
+    public function getTeams($team_id = 0) {
         if ($team_id > 0) {
 
             return isset($this->teams['id' . $team_id]) ? $this->teams['id' . $team_id] : NULL;
