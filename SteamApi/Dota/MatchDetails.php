@@ -202,13 +202,12 @@ class MatchDetails extends DotaApi {
     public function getRegion($id = 322) {
         $region = 'Unknow';
 
-        foreach ($array as $r_id => $r_name) {
+        foreach ($this->maxReqions as $r_id => $r_name) {
             // assigned region if  cluster less max region id
             if ($id < $r_id) {
                 $region = $r_name;
             }
         }
-
         return $region;
     }
 
