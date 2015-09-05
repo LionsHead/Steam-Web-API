@@ -40,16 +40,9 @@ class Request {
             $params['format'] = $this->STEAM_API_FORMAT;
             $params['language'] = $this->STEAM_API_LNG;
         }
-        // formatting query url
-        $url = $url . '?';
-        foreach ($params as $key => $value) {
-            if (!is_null($value)) {
-                $url .= $key . '=' . $value . '&';
-            }
-        }
-
+        
         // send request
-        $curl = curl_init($url);
+        $curl = curl_init($url . '?' . http_build_query($params));
 
         curl_setopt_array($curl, [
             // degug
