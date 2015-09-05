@@ -14,6 +14,12 @@ class JsFeed extends Request {
     const TI_POOL_JS = 'http://www.dota2.com/jsfeed/intlprizepool/';
 
     public $LANGUAGE_JS = 'russian';
+    
+    public $fixit = [
+        'techies_suicide' => 'techies_suicide_squad_attack', 
+        'drow_ranger_wave_of_silence' =>  'drow_ranger_silence',
+        'skeleton_king_mortal_strike' => 'skeleton_king_critical_strike'
+    ];
 
     public function getAbilityData() {
         $json = $this->send(jsFeed::ABILITY_JS, ['l' => $this->LANGUAGE_JS]);
@@ -25,26 +31,32 @@ class JsFeed extends Request {
             unset($value['id']);
             $value['steam_name'] = $key;
             // удаляем лишние пробелы и переносы, чисто визуальная составляющая
-            $value['attrib'] = str_replace(" / ", "/", preg_replace("/[\r\n]+/", "", $value['attrib']));
-            $value['dmg'] = str_replace(" / ", "/", $value['dmg']);
-            #    $value['cmb'] = str_replace('http://cdn.dota2.com/apps/dota2/images/tooltips/mana.png', '', $value['cmb']);
-            #     $data[$key]['cmb'] = str_replace('http://cdn.dota2.com/apps/dota2/images/tooltips/cooldown.png', '', $value['cmb']);
+            
+            $value['affects'] = jsFeed::format($value['affects']);
+            $value['attrib'] = jsFeed::format($value['attrib']);
+            $value['dmg'] = jsFeed::format($value['dmg']);
+            // удаляем img и перенос
+            $value['cmb'] = preg_replace("/<(img|br)[^<>]*?>/", '', $value['cmb']); 
+            
 // метки чтоб не пропадали момо кассы - спс вольво
-            $save_key = $key;
-// кекис
-            if ($key == 'techies_suicide')
-                $save_key = 'techies_suicide_squad_attack';
-// квопа
-            if ($key == 'drow_ranger_wave_of_silence')
-                $save_key = 'drow_ranger_silence';
-// вк
-            if ($key == 'skeleton_king_mortal_strike')
-                $save_key = 'skeleton_king_critical_strike';
-            $abilitydata[$save_key] = $value;
+            if (array_key_exists($key, $this->fixit)){
+                $key = $this->fixit[$key];
+            }
+            
+            $abilitydata[$key] = $value;
         }
         return $abilitydata;
     }
 
+       /**
+        * удаление переноса в конце, удаление пробелов в перечислении
+        * @param type $value
+        * @return type
+        */
+    public static function format($value){
+        return str_replace(" / ", "/",  preg_replace("/<br[^<>]*?>$/", '', $value));
+    }
+    
     /**
      * return all descripton heroes
      * @return array
@@ -58,11 +70,6 @@ class JsFeed extends Request {
             $value['steam_id'] = (int) $value['id'];
             unset($value['id']);
             $value['steam_name'] = $key;
-            // удаляем лишние пробелы и переносы, чисто визуальная составляющая
-            $value['attrib'] = str_replace(" / ", "/", preg_replace("/[\r\n]+/", "", $value['attrib']));
-            $value['attrib'] = str_replace(" / ", "/", $value['attrib']);
-            # $value['cmb'] = str_replace('http://cdn.dota2.com/apps/dota2/images/tooltips/mana.png', '/img/icons/ability/mana.png', $value['cmb']);
-            #  $data[$key]['cmb'] = str_replace('http://cdn.dota2.com/apps/dota2/images/tooltips/cooldown.png', '/img/icons/ability/time.png', $value['cmb']);
             $itemdata[$value['steam_id']] = $value;
         }
         return $itemdata;
