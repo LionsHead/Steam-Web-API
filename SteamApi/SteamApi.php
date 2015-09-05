@@ -160,8 +160,8 @@ class SteamApi extends Request {
         foreach ($json['players'] as $value) {
             $players[$value['SteamId']] = [
                 'steam_id' => $value['SteamId'],
-                'CommunityBanned' => (int) $value['CommunityBanned'],
-                'VACBanned' => (int) $value['VACBanned'],
+                'CommunityBanned' =>  (int)(bool) $value['CommunityBanned'],
+                'VACBanned' =>  (int)(bool) $value['VACBanned'],
                 'NumberOfVACBans' => (int) $value['NumberOfVACBans'],
                 'DaysSinceLastBan' => (int) $value['DaysSinceLastBan'],
                 'NumberOfGameBans' => (int) $value['NumberOfGameBans'],
