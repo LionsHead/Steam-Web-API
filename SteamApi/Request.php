@@ -49,20 +49,16 @@ class Request {
         }
 
         // send request
-        $curl = curl_init();
+        $curl = curl_init($url);
 
         curl_setopt_array($curl, [
             // degug
             // CURLOPT_NOPROGRESS => FALSE,
             // CURLOPT_VERBOSE => TRUE,
             //connect
-            CURLOPT_URL => $url,
             CURLOPT_RETURNTRANSFER => TRUE,
             CURLOPT_CONNECTTIMEOUT => Request::CURL_CONNECTTIMEOUT,
-            CURLOPT_TIMEOUT => Request::CURL_TIMEOUT,
-            //ssl
-           // CURLOPT_SSL_VERIFYPEER => FALSE,
-           // CURLOPT_SSL_VERIFYHOST => FALSE
+            CURLOPT_TIMEOUT => Request::CURL_TIMEOUT
         ]);
 
         $response = curl_exec($curl) or die(curl_error($curl));
