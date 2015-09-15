@@ -2,7 +2,7 @@
 
 namespace SteamApi;
 
-
+use SteamApi\Dota\LiveMatch;
 use SteamApi\Dota\TeamInfo;
 use SteamApi\Dota\MatchDetails;
 
@@ -28,7 +28,18 @@ class DotaApi extends Request {
         if ($json['result']['status'] !== 200 or !isset($json['result']['games'])) {
             return NULL;
         }
-        return $json['result']['games'];
+        
+        $matches = [];
+        foreach ($json['result']['games'] as $match) {
+            $m = new LiveMatch($match);
+            $match = $m->info;
+            $match['players'] = $m->players;
+            $match['draft'] = $m->draft;
+            
+            $matches[] = $match;
+        }
+        
+        return $matches;
     }
 
     /**

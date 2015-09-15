@@ -6,7 +6,6 @@ use SteamApi\SteamApi;
 use SteamApi\DotaApi;
 
 class LiveMatch extends DotaApi {
-
     public $players = [
         // teams
         'radiant' => [],
@@ -14,15 +13,17 @@ class LiveMatch extends DotaApi {
         // admins, commentators
         'lobby' => []
     ];
-    // game info
+    // match info
     public $info = [];
     // pick and bans
     public $draft = [];
 
     function __construct($data = []) {
+        // players list
         $this->players = $this->setPlayersArray($data['players']);
         unset($data['players']);
-
+        
+        // players statistics
         if (isset($data['scoreboard'])) {
             $this->setScoreboardArray($data['scoreboard']);
             unset($data['scoreboard']);
@@ -35,8 +36,9 @@ class LiveMatch extends DotaApi {
         if (isset($data['radiant_team']['team_name']) and SteamApi::FILTER) {
             SteamApi::filter($data['dire_team']['team_name']);
         }
-
-        $this->info = $data;
+        
+        // other match info
+        $this->info += $data;
     }
 
     public function setPlayersArray(array $data = []) {
@@ -50,7 +52,7 @@ class LiveMatch extends DotaApi {
     }
 
     /**
-     * 
+     *  snapshot match
      * @param array $data
      * @return array
      */
