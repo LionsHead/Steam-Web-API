@@ -1,9 +1,9 @@
-# Steam Web API
- Language -  language format ISO639-1 English (en, en_US), Russian (ru, ru_RU)
- Format - json (default), xml, vdf - Valve Data Format
- API_KEY - see www.steamcommunity.com/dev/apikey
+#### Steam Web API
+ Language -  language format ISO639-1 English (en, en_US), Russian (ru, ru_RU).
+ Format - json (default), xml, vdf - Valve Data Format.
+ API_KEY - see www.steamcommunity.com/dev/apikey.
  
- example:
+#### example:
 
 ````php
 use SteamApi\SteamApi;
