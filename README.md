@@ -9,11 +9,11 @@ use SteamApi\SteamApi;
 use SteamApi\JsFeed;
 use SteamApi\DotaApi;
 
+
 $api = new SteamApi(STEAM_KEY);
 $steam_id64bit = [SteamApi::convertUserId(36553880)]; // convertaion steam id - 32 to 64bit
 $json = $api->getPlayerSummaries($steam_id64bit); // get  steam profile
 print_r($json);
-
 
 $api = new DotaApi(STEAM_KEY);
 
@@ -38,3 +38,4 @@ print_r($json);
 // get current hero info
 $json = $api->getHeroData();
 print_r($json);
+?>
