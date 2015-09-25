@@ -3,18 +3,22 @@
  Format - json (default), xml, vdf - Valve Data Format
  API_KEY - see www.steamcommunity.com/dev/apikey
  
-example:
-<?php
+ example:
+
+````php
 use SteamApi\SteamApi;
 use SteamApi\JsFeed;
 use SteamApi\DotaApi;
+````
 
-
+````php
 $api = new SteamApi(STEAM_KEY);
 $steam_id64bit = [SteamApi::convertUserId(36553880)]; // convertaion steam id - 32 to 64bit
 $json = $api->getPlayerSummaries($steam_id64bit); // get  steam profile
 print_r($json);
+````
 
+````php
 $api = new DotaApi(STEAM_KEY);
 
 # Live league games
@@ -25,7 +29,9 @@ print_r($json);
 $match_id = 1745689587; //ti5 final
 $json = $api->getMatchDetails($id);
 print_r($json);
+````
 
+````php
 $api = new JsFeed();
 // get current items descriptions 
 $json = $api->getItemData();
@@ -38,4 +44,4 @@ print_r($json);
 // get current hero info
 $json = $api->getHeroData();
 print_r($json);
-?>
+````
