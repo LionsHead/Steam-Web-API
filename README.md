@@ -16,6 +16,13 @@ $api = new SteamApi(STEAM_KEY);
 $steam_id64bit = [SteamApi::convertUserId(36553880)]; // convertaion steam id - 32 to 64bit
 $json = $api->getPlayerSummaries($steam_id64bit); // get  steam profile
 print_r($json);
+
+$json = $api->getPlayerAchievements($steam_id64bit, $app_id); // get app achivements
+print_r($json);
+
+$json = $api->getSteamLevel($steam_id64bit; // get lvl
+print_r($json);
+
 ````
 DotA 2 api
 ````php
