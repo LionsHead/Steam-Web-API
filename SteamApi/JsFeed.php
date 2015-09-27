@@ -84,7 +84,7 @@ class JsFeed extends Request {
             $value['steam_id'] = (int) $value['id'];
             unset($value['id']);
             $value['steam_name'] = $key;
-            $itemdata[$value['steam_id']] = $value;
+            $itemdata[$key] = $value;
         }
         return $itemdata;
     }
