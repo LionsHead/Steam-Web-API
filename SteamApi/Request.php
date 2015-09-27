@@ -54,7 +54,12 @@ class Request {
             CURLOPT_TIMEOUT => Request::CURL_TIMEOUT
         ]);
 
-        $response = curl_exec($curl) or die(curl_error($curl));
+        $response = curl_exec($curl);
+        
+        if ($response === FALSE){
+            die('Bad request: ' . curl_error($curl));
+        }
+        
         curl_close($curl);
 
         // return result
