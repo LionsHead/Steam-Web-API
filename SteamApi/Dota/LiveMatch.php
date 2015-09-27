@@ -30,10 +30,10 @@ class LiveMatch extends DotaApi {
         }
         
         // team name filter
-        if (isset($data['radiant_team']['team_name']) and SteamApi::FILTER) {
+        if (isset($data['radiant_team']['team_name']) && SteamApi::FILTER) {
             SteamApi::filter($data['radiant_team']['team_name']);
         }
-        if (isset($data['radiant_team']['team_name']) and SteamApi::FILTER) {
+        if (isset($data['radiant_team']['team_name']) && SteamApi::FILTER) {
             SteamApi::filter($data['dire_team']['team_name']);
         }
         
@@ -77,7 +77,7 @@ class LiveMatch extends DotaApi {
             unset($value['players']);
 
             // if mode: cm, rd
-            if (isset($value['picks']) and isset($value['bans'])) {
+            if (isset($value['picks']) && isset($value['bans'])) {
                 $value['picks'] = $this->setScoreDraft($value['picks']);
                 $value['bans'] = $this->setScoreDraft($value['bans']);
             }

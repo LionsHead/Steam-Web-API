@@ -25,7 +25,7 @@ class DotaApi extends Request {
      */
     public function getLiveLeagueGames() {
         $json = $this->send(DotaApi::GET_LIVE_GAMES);
-        if ($json['result']['status'] !== 200 or !isset($json['result']['games'])) {
+        if ($json['result']['status'] !== 200 || !isset($json['result']['games'])) {
             return NULL;
         }
         
@@ -120,7 +120,7 @@ class DotaApi extends Request {
      */
     public function getMatchDetails($match_id = 1697818230) {
         $json = $this->send(DotaApi::GET_MATCH_DETAILS, ['match_id' => (int) $match_id]);
-        if (!isset($json['result']['match_id']) or is_null($json['result']['match_id'])) {
+        if (!isset($json['result']['match_id']) || is_null($json['result']['match_id'])) {
             return NULL;
         }
         return new MatchDetails($json['result']);
@@ -139,11 +139,11 @@ class DotaApi extends Request {
                 ]);
 
         // A message explaining the status, should status not be 1.
-        if ($json['result']['status'] > 1 or !isset($json['result']['teams'])) {
+        if ($json['result']['status'] > 1 || !isset($json['result']['teams'])) {
             // доп статус: 8 - 'teams_requested' must be greater than 0.
             return (isset($json['result']['statusDetail'])) ? $json['result']['statusDetail'] : 'Bad request';
         }
-        if (is_null($json['result']['teams']) or !isset($json['result']['teams'])) {
+        if (is_null($json['result']['teams']) || !isset($json['result']['teams'])) {
             return NULL;
         }
 
@@ -176,7 +176,7 @@ class DotaApi extends Request {
             $params['date_max'] == $time_max;
         }
         $json = $this->send(DotaApi::GET_SCHEDULED_GAMES, $params = []);
-        if (is_null($json['result']['games']) or !isset($json['result']['games'])) {
+        if (is_null($json['result']['games']) || !isset($json['result']['games'])) {
             return NULL;
         }
         return $json['result']['games'];
@@ -193,7 +193,7 @@ class DotaApi extends Request {
         $json = $this->send(DotaApi::GET_HEROES, $params = [
             'itemizedonly' => $itemized
                 ]);
-        if (is_null($json['result']['heroes']) or !isset($json['result']['heroes'])) {
+        if (is_null($json['result']['heroes']) || !isset($json['result']['heroes'])) {
             return NULL;
         }
         $heroes = [];

@@ -277,7 +277,7 @@ class SteamApi extends Request {
      */
     public function getUGCFile(array $params = []) {
         $json = $this->send(SteamApi::GetUGCFileDetails, $params);
-        if (isset($json['status']['code']) and $json['status']['code'] == 9) {
+        if (isset($json['status']['code']) && $json['status']['code'] == 9) {
             return 'this id was not found.';
         }
         return $json['data'];
