@@ -1,6 +1,3 @@
 /tests/
 index.php
-.idea/encodings.xml
-.idea/modules.xml
-.idea/Steam-Web-API.iml
-*.xml
+*.idea
