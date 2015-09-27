@@ -175,7 +175,7 @@ class DotaApi extends Request {
         if ($time_max > 0) {
             $params['date_max'] == $time_max;
         }
-        $json = $this->send(DotaApi::GET_SCHEDULED_GAMES, $params = []);
+        $json = $this->send(DotaApi::GET_SCHEDULED_GAMES, $params);
         if (is_null($json['result']['games']) || !isset($json['result']['games'])) {
             return NULL;
         }
@@ -190,7 +190,7 @@ class DotaApi extends Request {
      *      string localized_name
      */
     public function getHeroes($itemized = 0) {
-        $json = $this->send(DotaApi::GET_HEROES, $params = [
+        $json = $this->send(DotaApi::GET_HEROES, [
             'itemizedonly' => $itemized
                 ]);
         if (is_null($json['result']['heroes']) || !isset($json['result']['heroes'])) {
@@ -223,7 +223,6 @@ class DotaApi extends Request {
     public function getGameItems() {
         $json = $this->send(DotaApi::GET_ITEMS);
 
-        #return $json['result']['items'];
         $items = [];
         foreach ($json['result']['items'] as $id => $item) {
             $item['steam_id'] = $item['id'];
@@ -239,8 +238,8 @@ class DotaApi extends Request {
      *
      * @return array
      */
-    public function GetRarities() {
-        $json = $this->send(DotaApi::GET_RARITIES, $params = []);
+    public function getRarities() {
+        $json = $this->send(DotaApi::GET_RARITIES);
         if (!isset($json['result']['rarities'])) {
             return NULL;
         }
@@ -258,7 +257,7 @@ class DotaApi extends Request {
      *
      * @return int
      */
-    public function GetTournamentPrizePool($league_id = 600) {
+    public function getTournamentPrizePool($league_id = 600) {
         $json = $this->send(DotaApi::GET_PRIZE_POOL, ['leagueid' => $league_id]);
         $prize_pool = (isset($json['result']['prize_pool'])) ? (int) $json['result']['prize_pool'] : NULL;
         return $prize_pool;

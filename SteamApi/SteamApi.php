@@ -13,7 +13,7 @@ class SteamApi extends Request {
     const GET_FRIENDS = 'http://api.steampowered.com/ISteamUser/GetFriendList/v1/';
     const GET_USER_GROUP = 'http://api.steampowered.com/ISteamUser/GetUserGroupList/v1/';
     const GET_ACHIVEMENTS = 'http://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v1/';
-    const GetUGCFileDetails = 'http://api.steampowered.com/ISteamRemoteStorage/GetUGCFileDetails/v1/';
+    const GET_UGC_FILES = 'http://api.steampowered.com/ISteamRemoteStorage/GetUGCFileDetails/v1/';
     const GET_APP_NEWS = 'http://api.steampowered.com/ISteamNews/GetNewsForApp/v2';
     const GET_BANS = 'http://api.steampowered.com/ISteamUser/GetPlayerBans/v1/';
     const GET_STEAM_LVL = 'http://api.steampowered.com/IPlayerService/GetSteamLevel/v1/';
@@ -245,7 +245,7 @@ class SteamApi extends Request {
      *
      * @return arrays 		},
      */
-    public function GetNewsForApp(array $params = []) {
+    public function getNewsForApp(array $params = []) {
         if (!isset($params['appid'])) {
             $params['appid'] = 570; // dota 2 appid
         }
@@ -276,7 +276,7 @@ class SteamApi extends Request {
      *    size - Size of the file
      */
     public function getUGCFile(array $params = []) {
-        $json = $this->send(SteamApi::GetUGCFileDetails, $params);
+        $json = $this->send(SteamApi::GET_UGC_FILES, $params);
         if (isset($json['status']['code']) && $json['status']['code'] == 9) {
             return 'this id was not found.';
         }

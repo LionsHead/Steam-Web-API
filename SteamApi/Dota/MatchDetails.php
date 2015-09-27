@@ -112,7 +112,7 @@ class MatchDetails extends DotaApi {
         }
         // heresy start
         $json['league_id'] = $json['leagueid'];
-        // unset($this->matchInfo['leagueid']);
+        
         // heresy end? realy?
         // VOLVO give replay salt back
         $json['dire_win'] = ($json['radiant_win'] === TRUE) ? 0 : 1; // more info
