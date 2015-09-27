@@ -8,6 +8,7 @@ namespace SteamApi;
 class Request {
 
     public $lastTimer = 0; // timer the last request
+    public $errorStatus = FALSE; // curl error message
 
     const CURL_TIMEOUT = 120; // maximum! seconds to allow cURL functions to execute.
     const CURL_CONNECTTIMEOUT = 5; // wacht max 5 sec voor connectie server
@@ -40,7 +41,7 @@ class Request {
             $params['format'] = $this->STEAM_API_FORMAT;
             $params['language'] = $this->STEAM_API_LNG;
         }
-        
+
         // send request
         $curl = curl_init($url . '?' . http_build_query($params));
 
@@ -55,11 +56,9 @@ class Request {
         ]);
 
         $response = curl_exec($curl);
-        
-        if ($response === FALSE){
-            die('Bad request: ' . curl_error($curl));
-        }
-        
+        if (curl_error($curl)) {
+	    $this->errorStatus = curl_error($curl);
+	}
         curl_close($curl);
 
         // return result
@@ -70,4 +69,3 @@ class Request {
     }
 
 }
-

@@ -97,7 +97,7 @@ class MatchDetails extends DotaApi {
             $this->setPicksBans($json['picks_bans']);
             unset($json['picks_bans']);
         }
-        $this->setMatchInfo($json);
+        $this->setMatchInfo((array)$json);
 
         $this->setMatchPlayers();
     }
@@ -106,12 +106,12 @@ class MatchDetails extends DotaApi {
      *
      * @param type $json
      */
-    public function setMatchInfo($json = NULL) {
-        if (!is_array($json)) {
-            die('Steam api return bad response: not an array');
+    public function setMatchInfo(array $json = NULL) {
+        if (!isset($json['match_id'])) {
+            return NULL;
         }
         // heresy start
-        $json['league_id'] = $json['leagueid'];
+        $json['league_id'] = isset($json['leagueid']) ? $json['leagueid'] : 0;
         
         // heresy end? realy?
         // VOLVO give replay salt back
