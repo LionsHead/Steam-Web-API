@@ -12,6 +12,8 @@ class JsFeed extends Request {
     const HEROPICKER_JS = 'http://www.dota2.com/jsfeed/heropickerdata/';
     const UNIQUE_USERS_JS = 'http://www.dota2.com/jsfeed/uniqueusers/';
     const TI_POOL_JS = 'http://www.dota2.com/jsfeed/intlprizepool/';
+    // invoker %delay% - 2.9 sec
+    const INVOKER_EMP_DELAY = '2.9';
 
     public $LANGUAGE_JS = 'russian';
     
@@ -49,6 +51,10 @@ class JsFeed extends Request {
 // метки чтоб не пропадали момо кассы - спс вольво
             if (array_key_exists($key, $this->fixit)){
                 $key = $this->fixit[$key];
+            }
+// invoker %delay%
+            if ($key == 'invoker_emp'){
+                $value['desc'] = preg_replace("/\%delay\%/", JsFeed::INVOKER_EMP_DELAY, $value['desc']);
             }
             
             $abilitydata[$key] = $value;
