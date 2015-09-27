@@ -25,10 +25,10 @@ class JsFeed extends Request {
         $json = $this->send(jsFeed::ABILITY_JS, ['l' => $this->LANGUAGE_JS]);
 
         $abilitydata = [];
+        $mana = '/\<div class=\"mana\">(.*?)\<\/div>/';
+        $cd = '/\<div class=\"cooldown\">(.*?)\<\/div>/';
         foreach ($json['abilitydata'] as $key => $value) {
 
-            $value['steam_id'] = (int) $value['id'];
-            unset($value['id']);
             $value['steam_name'] = $key;
             // удаляем лишние пробелы и переносы, чисто визуальная составляющая
             
@@ -37,6 +37,14 @@ class JsFeed extends Request {
             $value['dmg'] = jsFeed::format($value['dmg']);
             // удаляем img и перенос
             $value['cmb'] = preg_replace("/<(img|br)[^<>]*?>/", '', $value['cmb']); 
+            /** 
+             * получаем отдельно кд и ману в виде массива
+             [0] => <div class="mana"> 60/60/60/60</div>
+             [1] =>  60/60/60/60
+             */
+            preg_match($mana, $value['cmb'], $value['mana']);
+            preg_match($cd, $value['cmb'], $value['cd']);
+            
             
 // метки чтоб не пропадали момо кассы - спс вольво
             if (array_key_exists($key, $this->fixit)){
