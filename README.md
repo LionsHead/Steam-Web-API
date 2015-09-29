@@ -1,30 +1,48 @@
-#### Steam Web API
+## Steam Web API
 1. API_KEY - see www.steamcommunity.com/dev/apikey.
 2. Language -  language format ISO639-1 English (en, en_US), Russian (ru, ru_RU).
 3. Format - json (default), xml, vdf - Valve Data Format.
  
-#### example:
+## example:
 
 ````php
 use SteamApi\SteamApi;
 use SteamApi\JsFeed;
 use SteamApi\DotaApi;
 ````
-Steam api
+####Steam api
 ````php
 $api = new SteamApi(STEAM_KEY);
-$steam_id64bit = [SteamApi::convertUserId(36553880)]; // convertaion steam id - 32 to 64bit
-$json = $api->getPlayerSummaries($steam_id64bit); // get  steam profile
+$steam_ids_64bit = [SteamApi::convertUserId(36553880)]; // convertaion steam id - 32 to 64bit
+$json = $api->getPlayerSummaries((array) $steam_ids_64bit); // get  steam profile
 print_r($json);
 
-$json = $api->getPlayerAchievements($steam_id64bit, $app_id); // get app achivements
+$steam_id_64bit = SteamApi::convertUserId(36553880);
+$json = $api->getPlayerAchievements((int) $steam_id_64bit,(int) $app_id); // get app achivements, default app - dota2 (570) 
 print_r($json);
 
-$json = $api->getSteamLevel($steam_id64bit); // get lvl
+$json = $api->getSteamLevel((int) $steam_id64bit); // get lvl, integer
+echo $json;
+
+$json = $api->getFriendList((int) $steam_id64bit); // get player friends
 print_r($json);
 
+$json = $api->getUserGroupList((int) $steam_id_64bit); // get player groups
+print_r($json);
+
+$json = $api->getUserInventory((int) $steam_id_64bit,(int) $app_id); // get inventory list
+print_r($json);
+
+$json = $api->getPlayerBans((array) $steam_ids_64bit); // get ban info
+print_r($json);
+
+$json = $api->getRecentlyPlayedGames((int) $steam_id_64bit, (int) $counter = 25); 
+print_r($json);
+
+$json= $api->getAppList(); // get steam app list
+print_r($json);
 ````
-DotA 2 api
+####DotA 2 api
 ````php
 $api = new DotaApi(STEAM_KEY);
 
