@@ -11,34 +11,51 @@ use SteamApi\JsFeed;
 use SteamApi\DotaApi;
 ````
 ####Steam api
+ get  steam profile
 ````php
 $api = new SteamApi(STEAM_KEY);
 $steam_ids_64bit = [SteamApi::convertUserId(36553880)]; // convertaion steam id - 32 to 64bit
-$json = $api->getPlayerSummaries((array) $steam_ids_64bit); // get  steam profile
+$json = $api->getPlayerSummaries((array) $steam_ids_64bit); //
 print_r($json);
-
+````
+get app achivements, default app - dota2 (570) 
+````php
 $steam_id_64bit = SteamApi::convertUserId(36553880);
-$json = $api->getPlayerAchievements((int) $steam_id_64bit,(int) $app_id); // get app achivements, default app - dota2 (570) 
+$json = $api->getPlayerAchievements((int) $steam_id_64bit,(int) $app_id); // 
 print_r($json);
-
-$json = $api->getSteamLevel((int) $steam_id64bit); // get lvl, integer
+````
+get lvl, integer
+````php
+$json = $api->getSteamLevel((int) $steam_id64bit); // 
 echo $json;
-
-$json = $api->getFriendList((int) $steam_id64bit); // get player friends
+````
+get player friends
+````php
+$json = $api->getFriendList((int) $steam_id64bit); // 
 print_r($json);
-
-$json = $api->getUserGroupList((int) $steam_id_64bit); // get player groups
+````
+get player groups
+````php
+$json = $api->getUserGroupList((int) $steam_id_64bit); // 
 print_r($json);
-
-$json = $api->getUserInventory((int) $steam_id_64bit,(int) $app_id); // get inventory list
+````
+get inventory list
+````php
+$json = $api->getUserInventory((int) $steam_id_64bit,(int) $app_id); // 
 print_r($json);
-
-$json = $api->getPlayerBans((array) $steam_ids_64bit); // get ban info
+````
+get users ban info
+````php
+$json = $api->getPlayerBans((array) $steam_ids_64bit); // 
 print_r($json);
-
+````
+get recently played games
+````php
 $json = $api->getRecentlyPlayedGames((int) $steam_id_64bit, (int) $counter = 25); 
 print_r($json);
-
+````
+get steam app list
+````php
 $json= $api->getAppList(); // get steam app list
 print_r($json);
 ````
