@@ -231,8 +231,14 @@ class SteamApi extends Request {
         return $groups;
     }
 
-    public function getUserInventory($steamid = 64) {
-        return $this->send('http://steamcommunity.com/profiles/' . $steamid . '/inventory/json/570/2/', []);
+    /**
+     *  user inventory list
+     * @param int $steamid - steam user id, 64bit
+     * @param int $app - steam app id
+     * @return array json
+     */
+    public function getUserInventory($steamid = 64, $app = 570) {
+        return $this->send('http://steamcommunity.com/profiles/' . $steamid . '/inventory/json/'. $app .'/2/', []);
     }
 
     /**
