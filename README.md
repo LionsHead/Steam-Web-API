@@ -15,38 +15,38 @@ use SteamApi\DotaApi;
 ````php
 $api = new SteamApi(STEAM_KEY);
 $steam_ids_64bit = [SteamApi::convertUserId(36553880)]; // convertaion steam id - 32 to 64bit
-$json = $api->getPlayerSummaries((array) $steam_ids_64bit); //
+$json = $api->getPlayerSummaries((array) $steam_ids_64bit);
 print_r($json);
 ````
 get app achivements, default app - dota2 (570) 
 ````php
 $steam_id_64bit = SteamApi::convertUserId(36553880);
-$json = $api->getPlayerAchievements((int) $steam_id_64bit,(int) $app_id); // 
+$json = $api->getPlayerAchievements((int) $steam_id_64bit,(int) $app_id); 
 print_r($json);
 ````
 get lvl, integer
 ````php
-$json = $api->getSteamLevel((int) $steam_id64bit); // 
+$json = $api->getSteamLevel((int) $steam_id64bit); 
 echo $json;
 ````
 get player friends
 ````php
-$json = $api->getFriendList((int) $steam_id64bit); // 
+$json = $api->getFriendList((int) $steam_id64bit); 
 print_r($json);
 ````
 get player groups
 ````php
-$json = $api->getUserGroupList((int) $steam_id_64bit); // 
+$json = $api->getUserGroupList((int) $steam_id_64bit); 
 print_r($json);
 ````
 get inventory list
 ````php
-$json = $api->getUserInventory((int) $steam_id_64bit,(int) $app_id); // 
+$json = $api->getUserInventory((int) $steam_id_64bit,(int) $app_id); 
 print_r($json);
 ````
 get users ban info
 ````php
-$json = $api->getPlayerBans((array) $steam_ids_64bit); // 
+$json = $api->getPlayerBans((array) $steam_ids_64bit); 
 print_r($json);
 ````
 get recently played games
@@ -68,7 +68,7 @@ $json = $api->getLiveLeagueGames();
 print_r($json);
 
 # Dota 2 match details info
-$match_id = 1745689587; //ti5 final
+$match_id = 1745689587; // ti5 final
 $json = $api->getMatchDetails($id);
 print_r($json);
 ````
