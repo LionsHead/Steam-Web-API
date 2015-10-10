@@ -26,6 +26,10 @@ class JsFeed extends Request {
     public function getAbilityData() {
         $json = $this->send(jsFeed::ABILITY_JS, ['l' => $this->LANGUAGE_JS]);
 
+        if ($json['abilitydata'] == NULL or !isset($json['abilitydata'])) {
+            return NULL;
+        }
+        
         $abilitydata = [];
         $mana = '/\<div class=\"mana\">(.*?)\<\/div>/';
         $cd = '/\<div class=\"cooldown\">(.*?)\<\/div>/';
@@ -78,6 +82,10 @@ class JsFeed extends Request {
     public function getItemData() {
         $json = $this->send(jsFeed::ITEM_JS, ['l' =>  $this->LANGUAGE_JS], Request::ONLY_REQUIRED);
 
+        if ($json['itemdata'] == NULL or !isset($json['itemdata'])) {
+            return NULL;
+        }
+        
         $itemdata = [];
         // обрабатываем все данные
         foreach ($json['itemdata'] as $key => $value) {
@@ -113,12 +121,17 @@ class JsFeed extends Request {
     }
 
     /**
-     * http://www.dota2.com/jsfeed/heropediadata?feeds=herodata&l=russian&callback=HeropediaDFReceive
+     * http://www.dota2.com/jsfeed/heropediadata?feeds=herodata&l=russian&
      *
      * @return array
      */
     public function getHeropedia() {
         $data = $this->send(jsFeed::HEROPEDIA_JS, ['feeds' => 'herodata', 'l' =>  $this->LANGUAGE_JS], Request::ONLY_REQUIRED);
+        
+        if ($json['herodata'] == NULL or !isset($json['herodata'])) {
+            return NULL;
+        }
+        
         $herodata = [];
         foreach ($data['herodata'] as $key => $value) {
             $value['steam_name'] = $key;
@@ -136,6 +149,7 @@ class JsFeed extends Request {
      */
     public function getHeroPickerData() {
         $json = $this->send(jsFeed::HEROPICKER_JS, ['l' =>  $this->LANGUAGE_JS], Request::ONLY_REQUIRED);
+        
         $herodata = [];
         foreach ($json as $key => $value) {
             $value['steam_name'] = $key;
