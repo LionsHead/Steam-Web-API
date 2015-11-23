@@ -33,7 +33,7 @@ class LiveMatch extends DotaApi {
         if (isset($data['radiant_team']['team_name']) && SteamApi::FILTER) {
             SteamApi::filter($data['radiant_team']['team_name']);
         }
-        if (isset($data['radiant_team']['team_name']) && SteamApi::FILTER) {
+        if (isset($data['dire_team']['team_name']) && SteamApi::FILTER) {
             SteamApi::filter($data['dire_team']['team_name']);
         }
         

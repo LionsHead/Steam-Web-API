@@ -26,7 +26,7 @@ class JsFeed extends Request {
     public function getAbilityData() {
         $json = $this->send(jsFeed::ABILITY_JS, ['l' => $this->LANGUAGE_JS]);
 
-        if ($json['abilitydata'] == NULL or !isset($json['abilitydata'])) {
+        if ($json['abilitydata'] == NULL || !isset($json['abilitydata'])) {
             return NULL;
         }
         
@@ -82,7 +82,7 @@ class JsFeed extends Request {
     public function getItemData() {
         $json = $this->send(jsFeed::ITEM_JS, ['l' =>  $this->LANGUAGE_JS], Request::ONLY_REQUIRED);
 
-        if ($json['itemdata'] == NULL or !isset($json['itemdata'])) {
+        if ($json['itemdata'] == NULL || !isset($json['itemdata'])) {
             return NULL;
         }
         
@@ -128,7 +128,7 @@ class JsFeed extends Request {
     public function getHeropedia() {
         $data = $this->send(jsFeed::HEROPEDIA_JS, ['feeds' => 'herodata', 'l' =>  $this->LANGUAGE_JS], Request::ONLY_REQUIRED);
         
-        if ($json['herodata'] == NULL or !isset($json['herodata'])) {
+        if ($json['herodata'] == NULL || !isset($json['herodata'])) {
             return NULL;
         }
         
