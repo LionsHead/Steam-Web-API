@@ -1,5 +1,5 @@
 ## Steam Web API
-1. API_KEY - see www.steamcommunity.com/dev/apikey.
+1. STEAM_API_KEY - see www.steamcommunity.com/dev/apikey.
 2. Language -  language format ISO639-1 English (en, en_US), Russian (ru, ru_RU).
 3. Format - json (default), xml, vdf - Valve Data Format.
  
@@ -13,7 +13,7 @@ use SteamApi\DotaApi;
 ####Steam api
  get  steam profile
 ````php
-$api = new SteamApi(STEAM_KEY);
+$api = new SteamApi(STEAM_API_KEY);
 $steam_ids_64bit = [SteamApi::convertUserId(36553880)]; // convertaion steam id - 32 to 64bit
 $json = $api->getPlayerSummaries((array) $steam_ids_64bit);
 print_r($json);
@@ -61,7 +61,7 @@ print_r($json);
 ````
 ####DotA 2 api
 ````php
-$api = new DotaApi(STEAM_KEY);
+$api = new DotaApi(STEAM_API_KEY);
 
 # Live league games
 $json = $api->getLiveLeagueGames();
