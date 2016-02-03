@@ -26,19 +26,19 @@ class DotaApi extends Request {
     public function getLiveLeagueGames() {
         $json = $this->send(DotaApi::GET_LIVE_GAMES);
         if ($json['result']['status'] !== 200 || !isset($json['result']['games'])) {
-            return NULL;
+            return [];
         }
-        
+
         $matches = [];
         foreach ($json['result']['games'] as $match) {
             $m = new LiveMatch($match);
             $match = $m->info;
             $match['players'] = $m->players;
             $match['draft'] = $m->draft;
-            
+
             $matches[] = $match;
         }
-        
+
         return $matches;
     }
 
