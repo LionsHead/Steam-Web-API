@@ -109,7 +109,6 @@ class JsFeed extends Request {
 
         $heroes = [];
         foreach ($heropedia as $key => $hero_data) {
-            $hero_b = $heropicer[$key];
             $hero = array_merge($hero_data, $heropicer[$key]);
             // delete duplicates info
             unset($hero['droles']);
